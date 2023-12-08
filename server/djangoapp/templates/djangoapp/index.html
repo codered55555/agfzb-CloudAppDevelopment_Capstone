@@ -14,15 +14,47 @@
 </head>
 
     <body>
+        <br><br><br>
     <!--Add a nav bar here -->
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <div class="navbar-header">
-                  <a class="navbar-brand" href="about">About Us</a>
-                  <a class="navbar-brand" href="contact">Contact Us</a>
-            </div>
+                <a class="navbar-brand" href="about">About Us</a>
+                <a class="navbar-brand" href="contact">Contact Us</a>
+          </div>
         </div>
+
+
+        {% if user.is_authenticated %}
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">{{ user }}</a>
+            <a class="navbar-brand" href="{% url 'djangoapp:logout' %}">Logout</a>
+      </div>
+        {% else %}
+
+        <form action="{% url 'djangoapp:login' %}"  method="post">
+            {% csrf_token %}
+        <div class="container-fluid">
+            <div class="navbar-header">
+                  <input type="text" name="username" required>
+                  <input type="password" name="psw" required>
+            </div>
+            <div class="navbar-header">
+                <input type="submit" value="Login" />
+                <a class="navbar-brand" href="signup">Signup</a>
+
+          </div>
+        </div>
+        </form>
+        {% endif %}
+
+
+
+
     </nav>
+
+
+
 
     <!--Add a dealer table here -->
 
